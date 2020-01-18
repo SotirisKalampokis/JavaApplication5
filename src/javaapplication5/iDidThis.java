@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.util.Random;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.apache.commons.math3.distribution.NormalDistribution;
+
+
+
 
 /**
  *
@@ -22,17 +26,34 @@ public void iDidThisSmile(Object ob){
     JSONArray Div = (JSONArray) JSob.get("Devices");
     String s="";
     s=s+("{\n\t\"Devices\":[\n");
+    NormalDistribution nd = new NormalDistribution(20,1.5);
+    double Winter = 10.06;
+    double Spring = 15.8;
+    double Summer = 26.06;
+    double Fall = 18.66;
     for(Object sdiv : Div ){
         JSONObject Items = (JSONObject) sdiv;
         JSONArray Hou = (JSONArray) Items.get("onhours");
         int onkwh = Integer.parseInt(Items.get("devkw").toString());
         double onKw = onkwh / 60.0;
+        int tempNaM = Integer.parseInt(Items.get("period").toString());
         int hours = 0;
         int mins = 0;
         double nowKw=0;
         int i = 0;
-
-        s=s+("\t\t{\n\t\t\t\"devid\" : " + Items.get("devid")+",\n\t\t\t\"devtype\" : \""+Items.get("devtype")+"\",\n");
+        double temp=0;
+        //Temp start
+        if (tempNaM==1){
+            temp=Winter;
+        }else if (tempNaM==2){
+            temp=Spring;
+        }else if (tempNaM==3){
+            temp=Summer;
+        }else if (tempNaM==4){
+            temp=Fall; 
+        }    
+        NormalDistribution ndTemp = new NormalDistribution(temp,2);
+        s=s+("\t\t{\n\t\t\t\"devid\" : " + Items.get("devid")+",\n\t\t\t\"devtype\" : \""+Items.get("devtype")+"\",\n"+"\t\t\t\"Temp\" : \""+ndTemp.sample()+"\",\n");
         s=s+("\t\t\t\"OnHours\":{\n");
         for(Object OnHours : Hou ){
             i++;
@@ -41,7 +62,7 @@ public void iDidThisSmile(Object ob){
                     //test for now 
                     Random rand = new Random();
                     if(rand.nextBoolean()){
-                        nowKw = 20*onKw;
+                        nowKw = nd.sample()*onKw;
                     }
                     if(hours<10 && mins<20){
                         s=s+("\t\t\t\t\""+"0"+hours+":0"+mins+"\":"+nowKw+",\n");
@@ -101,13 +122,14 @@ public void iDidThisSmile(Object ob){
         s=s+("\t\t{\n\t\t\t\"devid\" : " + Items.get("devid")+",\n\t\t\t\"devtype\" : \""+Items.get("devtype")+"\",\n");
         s=s+("\t\t\t\"StbHours\":{\n");
         for(Object StbHours : SbHou ){
-            i++;
+            i++;  
             if(StbHours.toString().equals("1")){
                 while(hours<=6*i){
                     //test for now 
                     Random rand = new Random();
                     if(rand.nextBoolean()){
-                        nowKw = 20*onKw;
+                        nowKw = nd.sample()*onKw;
+                        
                     }
                     if(hours<10 && mins<20){
                         s=s+("\t\t\t\t\""+"0"+hours+":0"+mins+"\":"+nowKw+",\n");
@@ -128,7 +150,6 @@ public void iDidThisSmile(Object ob){
                         mins=0;
                     }
                 }
-
             }else{
                 while(hours<=6*i){
                     if(hours<10 && mins<20){
