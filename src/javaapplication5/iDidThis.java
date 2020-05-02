@@ -29,7 +29,7 @@ public void iDidThisSmile(Object ob){
     String s="";
     s=s+("{\n\t\"Devices\":[\n");
     NormalDistribution nd = new NormalDistribution(20,1.5);
-    UniformIntegerDistribution ud = new UniformIntegerDistribution(0,71);
+    UniformIntegerDistribution ud = new UniformIntegerDistribution(0,72);
     double Winter = 10.06;
     double Spring = 15.8;
     double Summer = 26.06;
@@ -51,12 +51,13 @@ public void iDidThisSmile(Object ob){
         int x = 0;
         int r = 0;
         int timeRun = 0;
-        for(int k=0;k<=timesRun;k++){
+        System.out.print("New\n");
+        for(int k=0;k<timesRun;k++){
             do{
                 utr=ud.sample();
             }while(uniqeTimesRun.contains(utr));
             uniqeTimesRun.add(utr);
-            //System.out.print(uniqeTimesRun.get(k)+"\n");
+            System.out.print(uniqeTimesRun.get(k)+"\n");
         }
         uniqeTimesRun.sort(null);
        
