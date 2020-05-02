@@ -7,10 +7,12 @@ package javaapplication5;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.apache.commons.math3.distribution.NormalDistribution;
+import org.apache.commons.math3.distribution.UniformIntegerDistribution;
 
 
 
@@ -27,6 +29,7 @@ public void iDidThisSmile(Object ob){
     String s="";
     s=s+("{\n\t\"Devices\":[\n");
     NormalDistribution nd = new NormalDistribution(20,1.5);
+    UniformIntegerDistribution ud = new UniformIntegerDistribution(0,71);
     double Winter = 10.06;
     double Spring = 15.8;
     double Summer = 26.06;
@@ -34,14 +37,29 @@ public void iDidThisSmile(Object ob){
     for(Object sdiv : Div ){
         JSONObject Items = (JSONObject) sdiv;
         JSONArray Hou = (JSONArray) Items.get("onhours");
+        ArrayList<Integer> uniqeTimesRun = new ArrayList<Integer>();
         int onkwh = Integer.parseInt(Items.get("devkw").toString());
         double onKw = onkwh / 60.0;
         int tempNaM = Integer.parseInt(Items.get("period").toString());
+        int timesRun = Integer.parseInt(Items.get("timesrun").toString());
         int hours = 0;
         int mins = 0;
         double nowKw=0;
         int i = 0;
-        double temp=0;
+        double temp = 0;
+        int utr = 0;
+        int x = 0;
+        int r = 0;
+        int timeRun = 0;
+        for(int k=0;k<=timesRun;k++){
+            do{
+                utr=ud.sample();
+            }while(uniqeTimesRun.contains(utr));
+            uniqeTimesRun.add(utr);
+            //System.out.print(uniqeTimesRun.get(k)+"\n");
+        }
+        uniqeTimesRun.sort(null);
+       
         //Temp start
         if (tempNaM==1){
             temp=Winter;
@@ -60,10 +78,15 @@ public void iDidThisSmile(Object ob){
             if(OnHours.toString().equals("1")){
                 while(hours<=6*i){
                     //test for now 
-                    Random rand = new Random();
-                    if(rand.nextBoolean()){
+                    timeRun=uniqeTimesRun.get(r);
+                    if(timeRun==x){
                         nowKw = nd.sample()*onKw;
+                        r++;
+                        if(timesRun==r){
+                            r--;
+                        }
                     }
+                    x++;
                     if(hours<10 && mins<20){
                         s=s+("\t\t\t\t\""+"0"+hours+":0"+mins+"\":"+nowKw+",\n");
                     }else if (hours<10){
@@ -125,12 +148,17 @@ public void iDidThisSmile(Object ob){
             i++;  
             if(StbHours.toString().equals("1")){
                 while(hours<=6*i){
-                    //test for now 
-                    Random rand = new Random();
-                    if(rand.nextBoolean()){
+                    
+                    timeRun=uniqeTimesRun.get(r);
+                    if(timeRun==x){
                         nowKw = nd.sample()*onKw;
-                        
+                        r++;
+                        if(timesRun==r){
+                            r--;
+                        }
+
                     }
+                    x++;
                     if(hours<10 && mins<20){
                         s=s+("\t\t\t\t\""+"0"+hours+":0"+mins+"\":"+nowKw+",\n");
                     }else if (hours<10){
@@ -175,7 +203,7 @@ public void iDidThisSmile(Object ob){
         }
         s=s+("\t\t\t}\n");
         s=s+("\t\t},\n");
-        
+        uniqeTimesRun.clear();
     }
     s=s.substring(0,s.length()-2);
     s=s+("\n\t]\n");
