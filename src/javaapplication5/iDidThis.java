@@ -42,6 +42,11 @@ public void iDidThisSmile(Object ob){
         double onKw = onkwh / 60.0;
         int tempNaM = Integer.parseInt(Items.get("period").toString());
         int timesRun = Integer.parseInt(Items.get("timesrun").toString());
+        if (timesRun > 73){
+            timesRun=73;
+        }else if(timesRun<0){
+            timesRun=0;
+        }
         int hours = 0;
         int mins = 0;
         double nowKw=0;
