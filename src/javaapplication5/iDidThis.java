@@ -56,13 +56,13 @@ public void iDidThisSmile(Object ob){
         int x = 0;
         int r = 0;
         int timeRun = 0;
-        System.out.print("New\n");
+        //System.out.print("New\n");
         for(int k=0;k<timesRun;k++){
             do{
                 utr=ud.sample();
             }while(uniqeTimesRun.contains(utr));
             uniqeTimesRun.add(utr);
-            System.out.print(uniqeTimesRun.get(k)+"\n");
+            //System.out.print(uniqeTimesRun.get(k)+"\n");
         }
         uniqeTimesRun.sort(null);
        
@@ -148,7 +148,7 @@ public void iDidThisSmile(Object ob){
         hours = 0;
         mins = 0;
         nowKw=0;
-        s=s+("\t\t{\n\t\t\t\"devid\" : " + Items.get("devid")+",\n\t\t\t\"devtype\" : \""+Items.get("devtype")+"\",\n");
+        s=s+("\t\t{\n\t\t\t\"devid\" : " + Items.get("devid")+",\n\t\t\t\"devtype\" : \""+Items.get("devtype")+"\",\n"+"\t\t\t\"Temp\" : \""+ndTemp.sample()+"\",\n");
         s=s+("\t\t\t\"StbHours\":{\n");
         for(Object StbHours : SbHou ){
             i++;  
