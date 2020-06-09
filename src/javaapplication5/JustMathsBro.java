@@ -31,7 +31,7 @@ public void JustMathsBroCayote(Object ob){
     double Spring = 15.8;
     double Summer = 26.06;
     double Fall = 18.66;
-    for(Object sdiv : Div ){
+        for(Object sdiv : Div ){
         JSONObject Items = (JSONObject) sdiv;
         JSONArray Hou = (JSONArray) Items.get("onhours");
         JSONArray House =(JSONArray) Items.get("onhouse");
@@ -97,36 +97,36 @@ public void JustMathsBroCayote(Object ob){
                     }
                     x++;
                     if(hours<10 && mins<20){
-                        s=s+("\t\t\t\t\""+"0"+hours+":0"+mins+"\":"+nowKw+",");
+                        s=s+("\t\t\t\t\""+"0"+hours+":0"+mins+"\":["+nowKw+",");
                     }else if (hours<10){
-                        s=s+("\t\t\t\t\""+"0"+hours+":"+mins+"\":"+nowKw+",");
+                        s=s+("\t\t\t\t\""+"0"+hours+":"+mins+"\":["+nowKw+",");
 
                     }else if(hours==24){
-                        s=s+("\t\t\t\t\""+hours+":0"+mins+"\":"+nowKw+",");
+                        s=s+("\t\t\t\t\""+hours+":0"+mins+"\":["+nowKw+",");
                     }else if(hours>=10 && mins<20){
-                       s=s+("\t\t\t\t\""+hours+":0"+mins+"\":"+nowKw+",");
+                       s=s+("\t\t\t\t\""+hours+":0"+mins+"\":["+nowKw+",");
 
                     }else{
-                       s=s+("\t\t\t\t\""+hours+":"+mins+"\":"+nowKw+",");
+                       s=s+("\t\t\t\t\""+hours+":"+mins+"\":["+nowKw+",");
 
                     }
                     rand=Math.random();
                     if(House.get(i-1).toString().equals("1")){
                         if(rand < 0.85){
-                            s=s+("1,\n");
+                            s=s+("1],\n");
                         }else{
-                            s=s+("0,\n");
+                            s=s+("0],\n");
                         }
                     }else if(House.get(i-1).toString().equals("1") && hours==24){
                         if(rand < 0.85){
-                            s=s+("1\n");
+                            s=s+("1]\n");
                         }else{
-                            s=s+("0\n");
+                            s=s+("0]\n");
                         }
                     }else if(House.get(i-1).toString().equals("0") && hours==24){
-                        s=s+("0\n");
+                        s=s+("0]\n");
                     }else if(House.get(i-1).toString().equals("0")){
-                        s=s+("0,\n");
+                        s=s+("0],\n");
                     }
                     mins = mins + 20;
                     nowKw=0;
@@ -141,32 +141,32 @@ public void JustMathsBroCayote(Object ob){
             }else{
                 while(hours<=6*i){
                     if(hours<10 && mins<20){
-                        s=s+("\t\t\t\t\""+"0"+hours+":0"+mins+"\":"+nowKw+",");
+                        s=s+("\t\t\t\t\""+"0"+hours+":0"+mins+"\":["+nowKw+",");
                     }else if (hours<10){
-                        s=s+("\t\t\t\t\""+"0"+hours+":"+mins+"\":"+nowKw+",");
+                        s=s+("\t\t\t\t\""+"0"+hours+":"+mins+"\":["+nowKw+",");
                     }else if(hours==24){
-                        s=s+("\t\t\t\t\""+hours+":0"+mins+"\":"+nowKw+",");
+                        s=s+("\t\t\t\t\""+hours+":0"+mins+"\":["+nowKw+",");
                     }else if(hours>=10 && mins<20){
-                        s=s+("\t\t\t\t\""+hours+":0"+mins+"\":"+nowKw+",");
+                        s=s+("\t\t\t\t\""+hours+":0"+mins+"\":["+nowKw+",");
                     }else{
-                        s=s+("\t\t\t\t\""+hours+":"+mins+"\":"+nowKw+",");
+                        s=s+("\t\t\t\t\""+hours+":"+mins+"\":["+nowKw+",");
                     }
                     if(House.get(i-1).toString().equals("1")){
                         if(rand < 0.85){
-                            s=s+("1,\n");
+                            s=s+("1],\n");
                         }else{
-                            s=s+("0,\n");
+                            s=s+("0],\n");
                         }
                     }else if(House.get(i-1).toString().equals("1") && hours==24){
                         if(rand < 0.85){
-                            s=s+("1\n");
+                            s=s+("1]\n");
                         }else{
-                            s=s+("0\n");
+                            s=s+("0]\n");
                         }
                     }else if(House.get(i-1).toString().equals("0") && hours==24){
-                        s=s+("0\n");
+                        s=s+("0]\n");
                     }else if(House.get(i-1).toString().equals("0")){
-                        s=s+("0,\n");
+                        s=s+("0],\n");
                     }
 
                     mins = mins + 20;
@@ -206,33 +206,33 @@ public void JustMathsBroCayote(Object ob){
                     }
                     x++;
                     if(hours<10 && mins<20){
-                        s=s+("\t\t\t\t\""+"0"+hours+":0"+mins+"\":"+nowKw+",");
+                        s=s+("\t\t\t\t\""+"0"+hours+":0"+mins+"\":["+nowKw+",");
                     }else if (hours<10){
-                        s=s+("\t\t\t\t\""+"0"+hours+":"+mins+"\":"+nowKw+",");
+                        s=s+("\t\t\t\t\""+"0"+hours+":"+mins+"\":["+nowKw+",");
                     }else if(hours==24){
-                        s=s+("\t\t\t\t\""+hours+":0"+mins+"\":"+nowKw+",");
+                        s=s+("\t\t\t\t\""+hours+":0"+mins+"\":["+nowKw+",");
                     }else if(hours>=10 && mins<20){
-                        s=s+("\t\t\t\t\""+hours+":0"+mins+"\":"+nowKw+",");
+                        s=s+("\t\t\t\t\""+hours+":0"+mins+"\":["+nowKw+",");
                     }else{
-                        s=s+("\t\t\t\t\""+hours+":"+mins+"\":"+nowKw+",");
+                        s=s+("\t\t\t\t\""+hours+":"+mins+"\":["+nowKw+",");
                     }
                     rand=Math.random();
                     if(House.get(i-1).toString().equals("1")){
                         if(rand < 0.85){
-                            s=s+("1,\n");
+                            s=s+("1],\n");
                         }else{
-                            s=s+("0,\n");
+                            s=s+("0],\n");
                         }
                     }else if(House.get(i-1).toString().equals("1") && hours==24){
                         if(rand < 0.85){
-                            s=s+("1\n");
+                            s=s+("1]\n");
                         }else{
-                            s=s+("0\n");
+                            s=s+("0]\n");
                         }
                     }else if(House.get(i-1).toString().equals("0") && hours==24){
-                        s=s+("0\n");
+                        s=s+("0]\n");
                     }else if(House.get(i-1).toString().equals("0")){
-                        s=s+("0,\n");
+                        s=s+("0],\n");
                     }
                     mins = mins + 20;
                     nowKw=0;
@@ -245,33 +245,33 @@ public void JustMathsBroCayote(Object ob){
             }else{
                 while(hours<=6*i){
                     if(hours<10 && mins<20){
-                        s=s+("\t\t\t\t\""+"0"+hours+":0"+mins+"\":"+nowKw+",");
+                        s=s+("\t\t\t\t\""+"0"+hours+":0"+mins+"\":["+nowKw+",");
                     }else if (hours<10){
-                        s=s+("\t\t\t\t\""+"0"+hours+":"+mins+"\":"+nowKw+",");
+                        s=s+("\t\t\t\t\""+"0"+hours+":"+mins+"\":["+nowKw+",");
                     }else if(hours==24){
-                        s=s+("\t\t\t\t\""+hours+":0"+mins+"\":"+nowKw+",");
+                        s=s+("\t\t\t\t\""+hours+":0"+mins+"\":["+nowKw+",");
                     }else if(hours>=10 && mins<20){
-                        s=s+("\t\t\t\t\""+hours+":0"+mins+"\":"+nowKw+",");
+                        s=s+("\t\t\t\t\""+hours+":0"+mins+"\":["+nowKw+",");
                     }else{
-                        s=s+("\t\t\t\t\""+hours+":"+mins+"\":"+nowKw+",");
+                        s=s+("\t\t\t\t\""+hours+":"+mins+"\":["+nowKw+",");
                     }
                     rand=Math.random();
                     if(House.get(i-1).toString().equals("1")){
                         if(rand < 0.85){
-                            s=s+("1,\n");
+                            s=s+("1],\n");
                         }else{
-                            s=s+("0,\n");
+                            s=s+("0],\n");
                         }
                     }else if(House.get(i-1).toString().equals("1") && hours==24){
                         if(rand < 0.85){
-                            s=s+("1\n");
+                            s=s+("1]\n");
                         }else{
-                            s=s+("0\n");
+                            s=s+("0]\n");
                         }
                     }else if(House.get(i-1).toString().equals("0") && hours==24){
-                        s=s+("0\n");
+                        s=s+("0]\n");
                     }else if(House.get(i-1).toString().equals("0")){
-                        s=s+("0,\n");
+                        s=s+("0],\n");
                     }
                     mins = mins + 20;
                     if(hours ==6*i)break;
