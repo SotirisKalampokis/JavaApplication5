@@ -8,28 +8,24 @@ package javaapplication5;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.commons.math3.distribution.UniformIntegerDistribution;
-
-
-
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /**
  *
  * @author Sotiris
  */
-public class iDidThis {
-    
-public void iDidThisSmile(Object ob){
+public class JustMathsBro {
+
+public void JustMathsBroCayote(Object ob){
     JSONObject JSob = (JSONObject) ob;
     JSONArray Div = (JSONArray) JSob.get("Devices");
     String s="";
     s=s+("{\n\t\"Devices\":[\n");
-    NormalDistribution nd = new NormalDistribution(20,1.5,1);
-    NormalDistribution ndOn = new NormalDistribution(19,1.5);
+    NormalDistribution nd = new NormalDistribution(20,1.5);
+    NormalDistribution ndOn = new NormalDistribution(22,1.5);
     UniformIntegerDistribution ud = new UniformIntegerDistribution(0,72);
     double Winter = 10.06;
     double Spring = 15.8;
@@ -215,7 +211,7 @@ public void iDidThisSmile(Object ob){
     s=s.substring(0,s.length()-2);
     s=s+("\n\t]\n");
     s=s+("}\n");
-    try (FileWriter file = new FileWriter("C:\\Users\\Sotiris\\Desktop\\under.Json")) {
+    try (FileWriter file = new FileWriter("C:\\Users\\Sotiris\\Desktop\\Over.Json")) {
 
             file.write(s);
             file.flush();
@@ -225,3 +221,5 @@ public void iDidThisSmile(Object ob){
         }
 }
 }
+ 
+
