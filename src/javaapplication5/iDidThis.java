@@ -294,7 +294,8 @@ public void iDidThisSmile(Object ob){
     s=s.substring(0,s.length()-2);
     s=s+("\n\t]\n");
     s=s+("}\n");
-    try (FileWriter file = new FileWriter("C:\\Users\\Sotiris\\Desktop\\under.Json")) {
+    String desktopPath = System.getProperty("user.home") + "/Desktop";
+    try (FileWriter file = new FileWriter(desktopPath+"/Under.Json")){
 
             file.write(s);
             file.flush();

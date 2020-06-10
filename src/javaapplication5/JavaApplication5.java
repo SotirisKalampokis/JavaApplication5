@@ -21,8 +21,8 @@ public class JavaApplication5 {
     public static void main(String[] args) {
         JSONParser P = new JSONParser();
         try {
- 
-            Object obj = P.parse(new FileReader("C:\\Users\\Sotiris\\Desktop\\Devices.Json"));
+            String desktopPath = System.getProperty("user.home") + "/Desktop";
+            Object obj = P.parse(new FileReader(desktopPath+"/Devices.Json"));
  
             JSONObject jsonObject = (JSONObject) obj;
             iDidThis jsonCrete = new iDidThis();
