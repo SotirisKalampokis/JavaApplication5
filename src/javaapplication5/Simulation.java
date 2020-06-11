@@ -8,28 +8,43 @@ package javaapplication5;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import org.apache.commons.math3.distribution.NormalDistribution;
-import org.apache.commons.math3.distribution.UniformIntegerDistribution;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.apache.commons.math3.distribution.NormalDistribution;
+import org.apache.commons.math3.distribution.UniformIntegerDistribution;
+
+
+
 
 /**
  *
  * @author Sotiris
  */
-public class ThisTwoAreWeird {
+public class Simulation {
     
-public void IAmNormal(Object ob){
+public ArrayList<Double> SimulationStart(Object ob,int NDbase){
     JSONObject JSob = (JSONObject) ob;
     JSONArray Div = (JSONArray) JSob.get("Devices");
+    ArrayList<Double> sumup= new ArrayList<Double>();
     String s="";
     s=s+("{\n\t\"Devices\":[\n");
     NormalDistribution nd = new NormalDistribution(20,1.5,1);
+    NormalDistribution ndOn = new NormalDistribution(NDbase,1.5);
+    String FileName = "";
+    if(NDbase==19){
+        FileName="Under.Json";
+    }else if(NDbase==22){
+        FileName="Over.Json";
+    }else{
+        FileName="Normal.Json";
+    }
     UniformIntegerDistribution ud = new UniformIntegerDistribution(0,72);
     double Winter = 10.06;
     double Spring = 15.8;
     double Summer = 26.06;
     double Fall = 18.66;
+    int z = 0;
+    double sum=0.0;
     for(Object sdiv : Div ){
         JSONObject Items = (JSONObject) sdiv;
         JSONArray Hou = (JSONArray) Items.get("onhours");
@@ -88,7 +103,7 @@ public void IAmNormal(Object ob){
                     //test for now 
                     timeRun=uniqeTimesRun.get(r);
                     if(timeRun==x){
-                        nowKw = nd.sample()*onKw;
+                        nowKw = ndOn.sample()*onKw;
                         r++;
                         if(timesRun==r){
                             r--;
@@ -128,6 +143,7 @@ public void IAmNormal(Object ob){
                         s=s+("0],\n");
                     }
                     mins = mins + 20;
+                    sum=sum+nowKw;
                     nowKw=0;
                     if(hours ==6*i)break;
                     if(mins == 60){
@@ -136,7 +152,6 @@ public void IAmNormal(Object ob){
                     }
                 }
                 
-
             }else{
                 while(hours<=6*i){
                     if(hours<10 && mins<20){
@@ -175,9 +190,11 @@ public void IAmNormal(Object ob){
                         mins=0;
                     }
                 //System.out.println(House.get(i-1).toString().equals("1"));
+                
                 }
             }
-        }        
+        }  
+
         s=s+("\t\t\t}\n");
         s=s+("\t\t},\n");
         JSONArray SbHou = (JSONArray) Items.get("stbhours");
@@ -234,6 +251,7 @@ public void IAmNormal(Object ob){
                         s=s+("0],\n");
                     }
                     mins = mins + 20;
+                    sum=sum+nowKw;
                     nowKw=0;
                     if(hours ==6*i)break;
                     if(mins == 60){
@@ -285,13 +303,15 @@ public void IAmNormal(Object ob){
         s=s+("\t\t\t}\n");
         s=s+("\t\t},\n");
         uniqeTimesRun.clear();
+        sumup.add(z,sum);
+        z++;
+        sum=0.0;
     }
- 
     s=s.substring(0,s.length()-2);
     s=s+("\n\t]\n");
     s=s+("}\n");
     String desktopPath = System.getProperty("user.home") + "/Desktop";
-    try (FileWriter file = new FileWriter(desktopPath+"/Normal.Json")){
+    try (FileWriter file = new FileWriter(desktopPath+"/"+FileName)){
 
             file.write(s);
             file.flush();
@@ -299,5 +319,7 @@ public void IAmNormal(Object ob){
         } catch (IOException e) {
             e.printStackTrace();
         }
+    return sumup;
 }
 }
+
