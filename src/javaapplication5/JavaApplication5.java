@@ -23,10 +23,12 @@ public class JavaApplication5 {
         try {
             String desktopPath = System.getProperty("user.home") + "/Desktop";
             Object obj = P.parse(new FileReader(desktopPath+"/Devices.Json"));
- 
+            
             JSONObject jsonObject = (JSONObject) obj;
-            iDidThis jsonCrete = new iDidThis();
-            jsonCrete.iDidThisSmile(jsonObject);
+            ThisTwoAreWeird jsonNormal= new ThisTwoAreWeird();
+            jsonNormal.IAmNormal(jsonObject);
+            iDidThis jsonUnder = new iDidThis();
+            jsonUnder.iDidThisSmile(jsonObject);
             JustMathsBro  jsonOver = new JustMathsBro();
             jsonOver.JustMathsBroCayote(jsonObject);
 
